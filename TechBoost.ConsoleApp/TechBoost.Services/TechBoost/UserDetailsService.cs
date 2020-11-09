@@ -35,6 +35,14 @@ namespace TechBoost.Services.TechBoost
             var orderedUsers = users.OrderBy(u => u.Role).ThenBy(u => u.Name).ToList();
             return orderedUsers;
         }
+        
+        public async Task<string> IsProfileImageExist(string id)
+        {
+            var result = await _azureBlobStorageService.BlobExistsAsync(id);
+            if (result)
+                return "True";
+            return "False";
+        }
 
         #region: private methods
 
